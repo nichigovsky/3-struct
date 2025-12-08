@@ -11,6 +11,12 @@ type Bin struct {
 
 type BinList = []Bin
 
+func createBin() *Bin {
+	return &Bin{
+		createdAt: time.Now(),
+	}
+}
+
 func createList() BinList {
 	sli := make(BinList, 0)
 
