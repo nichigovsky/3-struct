@@ -11,8 +11,10 @@ type Bin struct {
 
 type BinList = []Bin
 
-func createList() {
-	sli := make([]BinList, 2)
+func createList() BinList {
+	sli := make(BinList, 0)
+
+	return sli
 }
 
 func main() {
