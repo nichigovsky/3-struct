@@ -1,28 +1,44 @@
 package storage
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
 )
 
-func ReadFile(name string) ([]byte, error) {
-	data, err := os.ReadFile(name + ".json")
+type Storage struct {}
+
+func ReadFile(name string) (*Storage, error) {
+	file, err := os.ReadFile(name + ".json")
 	if err != nil {
 		return nil, errors.New("COULD_NOT_READ_FILE")
 	}
 
-	return data, nil
+	var storage Storage
+	err = json.Unmarshal(file, &storage)
+
+	if err != nil {
+		return nil, errors.New("COULD_NOT_READ_JSON")
+	}
+
+	return &storage, nil
 }
 
-func WriteFile(content []byte, name string) error {
+func WriteFile(storage *Storage, name string) error {
 	file, err := os.Create(name + ".json")
 
 	if err != nil {
 		return errors.New("COULD_NOT_CREATE_FILE")
 	}
 
-	_, err = file.Write(content)
+	data, err := json.Marshal(storage)
+
+	if err != nil {
+		return errors.New("COULD_NOT_CREATE_JSON")
+	}
+
+	_, err = file.Write(data)
 	defer file.Close()
 	
 	if err != nil {
