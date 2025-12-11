@@ -3,17 +3,17 @@ package main
 import "time"
 
 type Bin struct {
-	id string
-	private bool
-	createdAt time.Time
-	name string
+	Id string `json:"id"`
+	Private bool `json:"private"`
+	CreatedAt time.Time `json:"createdAt"`
+	Name string `json:"name"`
 }
 
 type BinList = []Bin
 
 func createBin() *Bin {
 	return &Bin{
-		createdAt: time.Now(),
+		CreatedAt: time.Now(),
 	}
 }
 
