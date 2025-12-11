@@ -7,7 +7,7 @@ import (
 )
 
 func ReadFile(name string) ([]byte, error) {
-	data, err := os.ReadFile(name)
+	data, err := os.ReadFile(name + ".json")
 	if err != nil {
 		return nil, errors.New("COULD_NOT_READ_FILE")
 	}
@@ -16,7 +16,7 @@ func ReadFile(name string) ([]byte, error) {
 }
 
 func WriteFile(content []byte, name string) error {
-	file, err := os.Create(name)
+	file, err := os.Create(name + ".json")
 
 	if err != nil {
 		return errors.New("COULD_NOT_CREATE_FILE")
@@ -29,7 +29,7 @@ func WriteFile(content []byte, name string) error {
 		return errors.New("COULD_NOT_WRITE_FILE")
 	}
 
-	fmt.Println("File has been created")
+	fmt.Println("JSON file has been created")
 
 	return nil
 }
